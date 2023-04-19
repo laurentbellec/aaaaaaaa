@@ -1,0 +1,21 @@
+<ktd-grid [cols]="cols" [rowHeight]="rowHeight" [layout]="layout" (layoutUpdated)="onLayoutUpdated($event)" [gap]="5">
+    <ktd-grid-item *ngFor="let item of layout; trackBy: trackById; let i = index" [id]="item.id" class="ktd-grid-item">
+        
+        <!-- Your grid item content goes here -->
+        <!-- <app-dummy-widget [color]="color[i]"></app-dummy-widget> -->
+
+        <ng-template #widget [cdkPortalOutlet]="componentPortals[i]" (attached)="portalAttached($event)"></ng-template>
+
+        <!-- Optional Custom placeholder template -->
+        <ng-template ktdGridItemPlaceholder>
+            <!-- Custom placeholder content goes here -->
+            <!-- <app-dummy-widget [color]="color[i]"></app-dummy-widget> -->
+            <ng-container *ngTemplateOutlet="widget"></ng-container>
+        </ng-template>
+    </ktd-grid-item>
+</ktd-grid>
+<br/><br/>
+<button type="button" (click)="discussWithInstance(0)">Discuss with instance 0</button><br/><br/>
+<button type="button" (click)="discussWithInstance(1)">Discuss with instance 1</button><br/><br/>
+<button type="button" (click)="discussWithInstance(2)">Discuss with instance 2</button><br/><br/>
+<button type="button" (click)="discussWithInstance(3)">Discuss with instance 3</button><br/><br/>

@@ -1,0 +1,5 @@
+<gridster [options]="options" class="nested-gridster">
+    <gridster-item [item]="item" *ngFor="let item of items; let i = index">
+        <div [style.background-color]="item.color" style="width: 100%; height: 100%"><b>{{ i }}</b></div>
+    </gridster-item>
+</gridster>
