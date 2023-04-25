@@ -1,1 +1,7 @@
-<p>widgets-group works!</p>
+<gridster [options]="options" class="nested-gridster">
+    <gridster-item [item]="widget.appearance" *ngFor="let widget of group.widgets; let i = index">
+        <div class="widget-container" style="width: 100%; height: 100%">
+            <ng-template [cdkPortalOutlet]="componentPortals[i]" (attached)="portalAttached($event)"></ng-template>
+        </div>
+    </gridster-item>
+</gridster>

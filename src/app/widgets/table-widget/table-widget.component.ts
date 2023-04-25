@@ -37,4 +37,10 @@ export class TableWidgetComponent {
         { id: 27, country: 'Sweden', year: 1995, iso: 'SE', population: 10004962, capital: 'Stockholm' },
         { id: 28, country: 'United Kingdom', year: 1973, iso: 'GB', population: 64100000, capital: 'London' },
     ];
+
+    constructor() {}
+
+    public publicTestMethod(text: string): void {
+        console.log(text)
+    }
 }

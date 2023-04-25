@@ -20,10 +20,16 @@ import { WIDGET_CONTAINER_CONFIG } from 'src/app/token/widget.token';
 import { GridsterWidgetComponent } from 'src/app/widgets/gridster-widget/gridster-widget.component';
 
 @Component({
-    templateUrl: './module2.component.html'
+    templateUrl: './module2.component.html',
+    styleUrls: ['./module2.component.scss'],
 })
 export class Module2Component implements OnInit {
-    components = [ChartWidgetComponent, TableWidgetComponent, DummyWidgetComponent, GridsterWidgetComponent]
+    components = [
+        ChartWidgetComponent,
+        TableWidgetComponent,
+        DummyWidgetComponent,
+        GridsterWidgetComponent,
+    ];
     options = {
         gridType: GridType.Fixed,
         compactType: CompactType.None,
@@ -63,10 +69,10 @@ export class Module2Component implements OnInit {
         emptyCellDragMaxRows: 50,
         ignoreMarginInRow: false,
         draggable: {
-          enabled: true
+            enabled: true,
         },
         resizable: {
-          enabled: true
+            enabled: true,
         },
         swap: false,
         pushItems: true,
@@ -77,90 +83,275 @@ export class Module2Component implements OnInit {
         displayGrid: DisplayGrid.Always,
         disableWindowResize: false,
         disableWarnings: false,
-        scrollToNewItems: false
-      };
+        scrollToNewItems: false,
+    };
 
-    dashboard = [
-        { cols: 2, rows: 1, y: 0, x: 0 },
-        { cols: 2, rows: 2, y: 0, x: 2, hasContent: true },
-        { cols: 1, rows: 1, y: 0, x: 4 },
-        { cols: 3, rows: 1, y: 2, x: 0 },
-        // { cols: 1, rows: 1, y: 1, x: 0 },
-        // { cols: 1, rows: 1, y: 1, x: 0 },
-        // {
-        //   cols: ,
-        //   rows: 2,
-        //   y: 3,
-        //   x: 5,
-        //   minItemRows: 2,
-        //   minItemCols: 2,
-        //   label: 'Min rows & cols = 2'
-        // },
-        // {
-        //   cols: 2,
-        //   rows: 2,
-        //   y: 2,
-        //   x: 0,
-        //   maxItemRows: 2,
-        //   maxItemCols: 2,
-        //   label: 'Max rows & cols = 2'
-        // },
-        // {
-        //   cols: 2,
-        //   rows: 1,
-        //   y: 2,
-        //   x: 2,
-        //   dragEnabled: true,
-        //   resizeEnabled: true,
-        //   label: 'Drag&Resize Enabled'
-        // },
-        // {
-        //   cols: 1,
-        //   rows: 1,
-        //   y: 2,
-        //   x: 4,
-        //   dragEnabled: false,
-        //   resizeEnabled: false,
-        //   label: 'Drag&Resize Disabled'
-        // },
-        // { cols: 1, rows: 1, y: 2, x: 6 }
+    dashboardGroups = [
+        {
+            cols: 3,
+            rows: 1,
+            y: 0,
+            x: 0,
+            groupTitle: 'aaaaa',
+            widgets: [
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'DummyWidgetComponent',
+                    component: DummyWidgetComponent,
+                    appearance: {
+                        x: 0,
+                        y: 0,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'ChartWidgetComponent',
+                    component: ChartWidgetComponent,
+                    appearance: {
+                        x: 1,
+                        y: 0,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'TableWidgetComponent',
+                    component: TableWidgetComponent,
+                    appearance: {
+                        x: 2,
+                        y: 0,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+            ],
+        },
+        {
+            cols: 1,
+            rows: 2,
+            y: 1,
+            x: 2,
+            groupTitle: 'bbbbb',
+            widgets: [
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'DummyWidgetComponent',
+                    component: DummyWidgetComponent,
+                    appearance: {
+                        x: 0,
+                        y: 0,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'TableWidgetComponent',
+                    component: TableWidgetComponent,
+                    appearance: {
+                        x: 0,
+                        y: 1,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+            ],
+        },
+        {
+            cols: 1,
+            rows: 1,
+            y: 0,
+            x: 4,
+            groupTitle: 'ccccc',
+            widgets: [
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'DummyWidgetComponent',
+                    component: DummyWidgetComponent,
+                    appearance: {
+                        x: 0,
+                        y: 0,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+            ],
+        },
+        {
+            cols: 2,
+            rows: 1,
+            y: 1,
+            x: 4,
+            groupTitle: 'ddddd',
+            widgets: [
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'DummyWidgetComponent',
+                    component: DummyWidgetComponent,
+                    appearance: {
+                        x: 0,
+                        y: 0,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'TableWidgetComponent',
+                    component: TableWidgetComponent,
+                    appearance: {
+                        x: 1,
+                        y: 0,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+            ],
+        },
+        {
+            cols: 3,
+            rows: 2,
+            y: 1,
+            x: 4,
+            groupTitle: 'eeeee',
+            widgets: [
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'TableWidgetComponent',
+                    component: TableWidgetComponent,
+                    appearance: {
+                        x: 0,
+                        y: 0,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'TableWidgetComponent',
+                    component: TableWidgetComponent,
+                    appearance: {
+                        x: 0,
+                        y: 1,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'TableWidgetComponent',
+                    component: TableWidgetComponent,
+                    appearance: {
+                        x: 0,
+                        y: 2,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'TableWidgetComponent',
+                    component: TableWidgetComponent,
+                    appearance: {
+                        x: 1,
+                        y: 0,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'TableWidgetComponent',
+                    component: TableWidgetComponent,
+                    appearance: {
+                        x: 1,
+                        y: 1,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+                {
+                    deniedRightIds: ['IGNORE_PORTFOLIO'],
+                    icon: 'cube',
+                    label: 'TableWidgetComponent',
+                    component: TableWidgetComponent,
+                    appearance: {
+                        x: 1,
+                        y: 2,
+                        rows: 1,
+                        cols: 1,
+                    },
+                },
+            ],
+        },
     ];
 
     componentPortals: ComponentPortal<any>[] = [];
-	componentRefs: ComponentRef<any>[] = [];
+    componentRefs: ComponentRef<any>[] = [];
     color = ['yellow', 'green', 'red', 'blue'];
 
-    constructor(private injector: Injector) {
-
-    }
+    constructor(private injector: Injector) {}
 
     ngOnInit() {
-		this.componentPortals = this.components.map((component, i) => this.createComponentPortal(
-                component,
-                { aaa: 'aaa', bbb: 'bbb', color: this.color[i] }
-            ) as ComponentPortal<any>);
-	}
-
-	onLayoutUpdated(e: any) {
-		console.log(e)
-	}
-
-	portalAttached(e: any) {
-		console.log(e)
-		this.componentRefs.push(e);
-	}
-
-	discussWithInstance(index: number) {
-		this.componentRefs[index].instance.incrementNumber();
-	}
-
-	private createComponentPortal(component: ComponentType<any>, config: any): ComponentPortal<any> {
-        const extendedConfig = { ...config };
-        return new ComponentPortal(component, null, this.createInjector(extendedConfig));
+        this.componentPortals = this.components.map(
+            (component, i) =>
+                this.createComponentPortal(component, {
+                    aaa: 'aaa',
+                    bbb: 'bbb',
+                    color: this.color[i],
+                }) as ComponentPortal<any>
+        );
     }
 
-	private createInjector(data: any): Injector {
-        const injectorTokens: StaticProvider = [{ provide: WIDGET_CONTAINER_CONFIG, useValue: data }];
+    onLayoutUpdated(e: any) {
+        console.log(e);
+    }
+
+    portalAttached(e: any) {
+        console.log(e);
+        this.componentRefs.push(e);
+    }
+
+    discussWithInstance(index: number) {
+        this.componentRefs[index].instance.incrementNumber();
+    }
+
+    public onClick(label: string) {
+        console.log(label);
+    }
+
+    private createComponentPortal(
+        component: ComponentType<any>,
+        config: any
+    ): ComponentPortal<any> {
+        const extendedConfig = { ...config };
+        return new ComponentPortal(
+            component,
+            null,
+            this.createInjector(extendedConfig)
+        );
+    }
+
+    private createInjector(data: any): Injector {
+        const injectorTokens: StaticProvider = [
+            { provide: WIDGET_CONTAINER_CONFIG, useValue: data },
+        ];
         return Injector.create({
             parent: this.injector,
             providers: injectorTokens,
