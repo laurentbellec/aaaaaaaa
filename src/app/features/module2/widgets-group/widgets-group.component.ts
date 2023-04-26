@@ -105,6 +105,15 @@ export class WidgetsGroupComponent implements OnInit, OnChanges {
             outOfBoundsWidget.$item = this.options.api.getFirstPossiblePosition(outOfBoundsWidget.$item);
             outOfBoundsWidget.checkItemChanges(this.options.api.getFirstPossiblePosition(outOfBoundsWidget.$item), outOfBoundsWidget.$item);
         });
+
+        const outOfSizeWidgets = this.getOutOfSizeWidgets();
+        outOfSizeWidgets?.forEach((outOfSizeWidget) => {
+            outOfSizeWidget.$item = {
+                ...outOfSizeWidget.item,
+                cols: 1,
+                rows: 1,
+            };
+        });
     }
 
     ngOnInit() {
@@ -125,8 +134,11 @@ export class WidgetsGroupComponent implements OnInit, OnChanges {
     }
 
     getOutOfBoundsWidgets() {
-        // return this.group.widgets.filter((item) => item.appearance.x > this.cols - 1 || item.appearance.y > this.rows - 1);
         return this.gridsterItems?.toArray().filter((item) => item.item.x > this.cols - 1 || item.item.y > this.rows - 1);
+    }
+
+    getOutOfSizeWidgets() {
+        return this.gridsterItems?.toArray().filter((item) => item.item.cols > this.cols || item.item.rows > this.rows);
     }
 
     public portalAttached(attachedRef: CdkPortalOutletAttachedRef): void {
