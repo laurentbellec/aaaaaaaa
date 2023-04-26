@@ -1,5 +1,5 @@
 <gridster [options]="options">
-    <gridster-item class="widgets-group" [item]="dashboardGroup" *ngFor="let dashboardGroup of dashboardGroups; let i = index">
+    <gridster-item #gridsterItem class="widgets-group" [item]="dashboardGroup" *ngFor="let dashboardGroup of dashboardGroups; let i = index" (itemChange)="onChangeItem($event)">
         <div class="widgets-group__header eui-u-flex eui-u-flex-justify-content-between">
             <div>{{ dashboardGroup.groupTitle }}</div>
             <div>
@@ -17,6 +17,6 @@
                 </eui-dropdown>
             </div>
         </div>
-        <app-widgets-group [group]="dashboardGroup"></app-widgets-group>
+        <app-widgets-group [group]="dashboardGroup" [cols]="gridsterItem.$item.cols" [rows]="gridsterItem.$item.rows"></app-widgets-group>
     </gridster-item>
 </gridster>

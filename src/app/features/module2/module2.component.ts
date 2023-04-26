@@ -1,4 +1,4 @@
-import { Component, OnInit, ComponentRef, Injector, StaticProvider } from '@angular/core';
+import { Component, OnInit, ComponentRef, Injector, StaticProvider, ViewChildren, QueryList } from '@angular/core';
 import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import {
   CompactType,
@@ -305,6 +305,7 @@ export class Module2Component implements OnInit {
     componentPortals: ComponentPortal<any>[] = [];
     componentRefs: ComponentRef<any>[] = [];
     color = ['yellow', 'green', 'red', 'blue'];
+    @ViewChildren('gridsterItem') gridsterItems: QueryList<GridsterItemComponent>;
 
     constructor(private injector: Injector) {}
 
@@ -319,17 +320,17 @@ export class Module2Component implements OnInit {
         );
     }
 
-    onLayoutUpdated(e: any) {
-        console.log(e);
-    }
+    // onLayoutUpdated(e: any) {
+    //     console.log(e);
+    // }
 
-    portalAttached(e: any) {
-        console.log(e);
-        this.componentRefs.push(e);
-    }
+    // discussWithInstance(index: number) {
+    //     this.componentRefs[index].instance.incrementNumber();
+    // }
 
-    discussWithInstance(index: number) {
-        this.componentRefs[index].instance.incrementNumber();
+    onChangeItem(e: any) {
+        // console.log(e)
+        // console.log(this.gridsterItems)
     }
 
     public onClick(label: string) {

@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, Injector, StaticProvider, ViewChildren, AfterViewInit } from '@angular/core';
+import { Component, Input, OnInit, Injector, StaticProvider, ViewChildren, OnChanges, QueryList, SimpleChanges } from '@angular/core';
 import { ComponentPortal, ComponentType, CdkPortalOutletAttachedRef } from '@angular/cdk/portal';
 import {
     CompactType,
@@ -19,8 +19,11 @@ import { WIDGET_CONTAINER_CONFIG } from 'src/app/token/widget.token';
     templateUrl: './widgets-group.component.html',
     styleUrls: ['./widgets-group.component.scss'],
 })
-export class WidgetsGroupComponent implements OnInit {
+export class WidgetsGroupComponent implements OnInit, OnChanges {
     @Input() group = null;
+    @Input() cols = 1;
+    @Input() rows = 1;
+
     options: GridsterConfig = {
         // disableScrollHorizontal: true,
         // disableScrollVertical: true,
@@ -83,15 +86,26 @@ export class WidgetsGroupComponent implements OnInit {
         // scrollToNewItems: false,
     };
 
-    items = [
-        { cols: 1, rows: 1, y: 0, x: 0, color: 'green' },
-        { cols: 1, rows: 1, y: 0, x: 1, color: 'yellow' },
-        { cols: 1, rows: 1, y: 0, x: 2, color: 'blue' },
-    ];
-
     componentPortals: ComponentPortal<any>[] = [];
+    @ViewChildren('gridsterItem') gridsterItems: QueryList<GridsterItemComponent>;
 
     constructor(private injector: Injector) {}
+
+    ngOnChanges(c: SimpleChanges) {
+        this.options = {
+            ...this.options,
+            minCols: this.cols,
+            maxCols: this.cols,
+            minRows: this.rows,
+            maxRows: this.rows,
+        };
+
+        const outOfBoundsWidgets = this.getOutOfBoundsWidgets();
+        outOfBoundsWidgets?.forEach((outOfBoundsWidget) => {
+            outOfBoundsWidget.$item = this.options.api.getFirstPossiblePosition(outOfBoundsWidget.$item);
+            outOfBoundsWidget.checkItemChanges(this.options.api.getFirstPossiblePosition(outOfBoundsWidget.$item), outOfBoundsWidget.$item);
+        });
+    }
 
     ngOnInit() {
         this.options = {
@@ -108,6 +122,11 @@ export class WidgetsGroupComponent implements OnInit {
                 // color: this.color[i],
             }) as ComponentPortal<any>
         );
+    }
+
+    getOutOfBoundsWidgets() {
+        // return this.group.widgets.filter((item) => item.appearance.x > this.cols - 1 || item.appearance.y > this.rows - 1);
+        return this.gridsterItems?.toArray().filter((item) => item.item.x > this.cols - 1 || item.item.y > this.rows - 1);
     }
 
     public portalAttached(attachedRef: CdkPortalOutletAttachedRef): void {
